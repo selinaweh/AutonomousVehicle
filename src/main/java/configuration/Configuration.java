@@ -18,7 +18,7 @@ public enum Configuration {
             JSONTokener jsonTokener = new JSONTokener(fileReader);
             JSONObject jsonObject = new JSONObject(jsonTokener);
             fileReader.close();
-            return jsonObject.getString("camera_type");
+            return jsonObject.getString("cameraType");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
