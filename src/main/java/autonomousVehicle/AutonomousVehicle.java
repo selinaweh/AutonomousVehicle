@@ -9,7 +9,7 @@ import autonomousVehicle.lights.indicator.Indicator;
 import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
 import autonomousVehicle.brake.Brake;
-import main.Configuration;
+import configuration.Configuration;
 
 public class AutonomousVehicle {
 
