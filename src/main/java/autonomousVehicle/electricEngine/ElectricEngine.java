@@ -3,7 +3,7 @@ import autonomousVehicle.Subscriber;
 import com.google.common.eventbus.Subscribe;
 import events.electricEngine.*;
 
-public class ElectricEngine extends Subscriber {
+public abstract class ElectricEngine extends Subscriber implements IEngine {
     private int currentRPM = 0;
     private int maxRPM;
     private boolean isOn = false;
@@ -35,5 +35,10 @@ public class ElectricEngine extends Subscriber {
     @Subscribe
     public void receive(EventDecreaseRPM eventDecreaseRPM) {
         // TODO: implement event logic
+    }
+
+    @Override
+    public int CalculateEnergyConsumption(int rpm) {
+        return 0;
     }
 }

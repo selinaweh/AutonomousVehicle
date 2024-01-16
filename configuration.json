@@ -1,3 +1,8 @@
 {
-  "camera_type": "v1"
+  "cameraType": "v1",
+  "engineType": "EngineX",
+  "lidarType": "LidarXT"
+
+
+
 }
