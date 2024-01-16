@@ -1,5 +1,6 @@
 package main;
 
+import autonomousVehicle.AutonomousVehicle;
 import autonomousVehicle.lights.brakeLight.BrakeLight;
 import autonomousVehicle.centralUnit.CentralUnit;
 import configuration.Configuration;
@@ -16,6 +17,22 @@ public class Application {
 
         Application application = new Application();
         application.createCameraPortInstance();
+
+        AutonomousVehicle autonomousVehicle = new AutonomousVehicle.Builder()
+                .Chassis()
+                .ElectricEngine()
+                .Battery()
+                .LEDHeadlight()
+                .BrakeLight()
+                .Indicator()
+                .Door()
+                .Seat()
+                .Wheel()
+                .Brake()
+                .GPS()
+                .Camera()
+                .Lidar()
+                .build();
 
         System.out.println("Camera version: " + application.getCameraVersion());
         System.out.println("Camera on     : " + application.setCameraOn());
