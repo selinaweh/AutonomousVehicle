@@ -10,7 +10,7 @@ public enum Configuration {
 
     public final String userDirectory = System.getProperty("user.dir");
     public final String fileSeparator = FileSystems.getDefault().getSeparator();
-    public final String pathToJavaArchive = userDirectory + fileSeparator + getCameraType() + fileSeparator + "camera" + fileSeparator + "jar" + fileSeparator + "camera.jar";
+    public final String pathToJavaArchive = userDirectory + fileSeparator + "camera" + fileSeparator + getCameraType() + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "camera.jar";
 
     public String getCameraType(){
         try {
