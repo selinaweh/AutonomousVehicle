@@ -1,7 +1,12 @@
 package main;
 
+import autonomousVehicle.lights.brakeLight.BrakeLight;
+import autonomousVehicle.centralUnit.CentralUnit;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        CentralUnit centralUnit = new CentralUnit();
+        centralUnit.addSubscriber(new BrakeLight());
     }
 }
