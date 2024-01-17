@@ -13,22 +13,78 @@ import main.Configuration;
 
 public class AutonomousVehicle {
 
+    //region PROPERTIES
     private final Chassis chassis;
-        private final ElectricEngine electricEngine;
-        private final Battery battery;
-        private final LEDHeadlight [] ledHeadLight;
-        private final BrakeLight[] brakeLight;
-        private final Indicator[] indicator;
-        private final Door [] door;
-        private final Seat [] seat;
-        private final   Wheel [] wheel;
-        private final Brake [] brake;
-        private final GPS[] gps;
-        private final Camera [] camera;
-        private final Lidar[] lidar;
+    private final ElectricEngine electricEngine;
+    private final Battery battery;
+    private final LEDHeadlight[] ledHeadLight;
+    private final BrakeLight[] brakeLight;
+    private final Indicator[] indicator;
+    private final Door[] door;
+    private final Seat[] seat;
+    private final Wheel[] wheel;
+    private final Brake[] brake;
+    private final GPS[] gps;
+    private final Camera[] camera;
+    private final Lidar[] lidar;
 
-    private AutonomousVehicle(Builder builder){
+    //endregion
 
+    //region GETTERS
+    public Chassis getChassis() {
+        return chassis;
+    }
+
+    public Battery getBattery() {
+        return battery;
+    }
+
+    public LEDHeadlight[] getLedHeadLight() {
+        return ledHeadLight;
+    }
+
+    public BrakeLight[] getBrakeLight() {
+        return brakeLight;
+    }
+
+    public Indicator[] getIndicator() {
+        return indicator;
+    }
+
+    public Door[] getDoor() {
+        return door;
+    }
+
+    public Seat[] getSeat() {
+        return seat;
+    }
+
+    public Wheel[] getWheel() {
+        return wheel;
+    }
+
+    public Brake[] getBrake() {
+        return brake;
+    }
+
+    public GPS[] getGps() {
+        return gps;
+    }
+
+    public Camera[] getCamera() {
+        return camera;
+    }
+
+    public Lidar[] getLidar() {
+        return lidar;
+    }
+    public ElectricEngine getElectricEngine() {
+        return electricEngine;
+    }
+    //endregion
+
+    //region CONSTRUCTOR
+    private AutonomousVehicle(Builder builder) {
         this.chassis = builder.chassis;
         this.electricEngine = builder.electricEngine;
         this.battery = builder.battery;
@@ -42,128 +98,124 @@ public class AutonomousVehicle {
         this.lidar = builder.lidar;
         this.seat = builder.seat;
         this.wheel = builder.wheel;
-
-
     }
+    //endregion
 
-
-
-
+    //region BUILDER
     public static class Builder {
 
         private Chassis chassis;
         private ElectricEngine electricEngine;
         private Battery battery;
-        private LEDHeadlight [] ledHeadLight;
+        private LEDHeadlight[] ledHeadLight;
         private BrakeLight[] brakeLight;
         private Indicator[] indicator;
-        private Door [] door;
-        private Seat [] seat;
-        private   Wheel [] wheel;
-        private Brake [] brake;
+        private Door[] door;
+        private Seat[] seat;
+        private Wheel[] wheel;
+        private Brake[] brake;
         private GPS[] gps;
-        private Camera [] camera;
+        private Camera[] camera;
         private Lidar[] lidar;
 
-        public Builder Chassis(){
+        public Builder Chassis() {
             chassis = new Chassis();
             return this;
         }
 
-        public Builder ElectricEngine(){
+        public Builder ElectricEngine() {
             electricEngine = Configuration.INSTANCE.engineType;
             return this;
         }
 
-        public Builder Battery(){
+        public Builder Battery() {
 
             battery = new Battery();
             return this;
         }
 
-        public Builder LEDHeadlight(){
+        public Builder LEDHeadlight() {
             ledHeadLight = new LEDHeadlight[4];
-            for(int i = 0; i<4; i++){
+            for (int i = 0; i < 4; i++) {
                 ledHeadLight[i] = new LEDHeadlight();
             }
             return this;
         }
 
-        public Builder BrakeLight(){
+        public Builder BrakeLight() {
             brakeLight = new BrakeLight[4];
-            for(int i = 0; i<4; i++){
+            for (int i = 0; i < 4; i++) {
                 brakeLight[i] = new BrakeLight();
             }
             return this;
         }
 
-        public Builder Indicator(){
+        public Builder Indicator() {
             indicator = new Indicator[4];
-            for(int i = 0; i<2; i++){
+            for (int i = 0; i < 2; i++) {
                 indicator[i] = new Indicator(Position.LEFT);
             }
-            for(int i = 2; i<4; i++){
+            for (int i = 2; i < 4; i++) {
                 indicator[i] = new Indicator(Position.RIGHT);
             }
             return this;
         }
 
-        public Builder Door(){
+        public Builder Door() {
             door = new Door[4];
-            for (int i = 0; i<4; i++){
+            for (int i = 0; i < 4; i++) {
                 door[i] = new Door();
             }
             return this;
         }
 
-        public Builder Seat(){
+        public Builder Seat() {
             seat = new Seat[2];
             seat[0] = new Seat();
             seat[1] = new Seat();
             return this;
         }
 
-        public Builder Wheel(){
+        public Builder Wheel() {
             wheel = new Wheel[4];
-            for (int i = 0; i<4; i++){
+            for (int i = 0; i < 4; i++) {
                 wheel[i] = new Wheel();
             }
             return this;
         }
 
-        public Builder Brake(){
+        public Builder Brake() {
             brake = new Brake[4];
-            for (int i = 0; i<4; i++){
+            for (int i = 0; i < 4; i++) {
                 brake[i] = new Brake();
             }
             return this;
         }
 
-        public Builder GPS(){
+        public Builder GPS() {
             gps = new GPS[2];
             gps[0] = new GPS();
             gps[1] = new GPS();
             return this;
         }
 
-        public Builder Camera(){
+        public Builder Camera() {
             //TODO: add camera
             return this;
         }
 
-        public Builder Lidar(){
+        public Builder Lidar() {
             lidar = new Lidar[2];
             lidar[0] = Configuration.INSTANCE.lidar;
             lidar[1] = Configuration.INSTANCE.lidar;
             return this;
         }
 
-        public AutonomousVehicle build(){
+        public AutonomousVehicle build() {
             return new AutonomousVehicle(this);
         }
 
     }
-
-
+    //endregion
 
 }
