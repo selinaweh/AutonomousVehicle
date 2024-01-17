@@ -8,6 +8,10 @@ public class Battery extends Subscriber {
     private int energy;
     private int capacity;
 
+    public void PlugIn2Pin(){
+        // TODO implement
+    }
+
     public Battery() {
         this.energy = 0;
         this.capacity = 100;
