@@ -201,6 +201,7 @@ public class AutonomousVehicle {
 
         public Builder Camera() {
             //TODO: add camera
+            camera = new Camera[2];
             return this;
         }
 
