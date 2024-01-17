@@ -21,8 +21,9 @@ public enum Configuration {
             return jsonObject.getString("camera_type");
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
         }
 
-        return null;
+
     }
 }
