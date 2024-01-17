@@ -8,8 +8,9 @@ public class Battery extends Subscriber {
     private int energy;
     private int capacity;
 
-    public void PlugIn2Pin(){
-        // TODO implement
+    public void PlugIn(){
+        ChargingAdapter adapter = new ChargingAdapter();
+        adapter.PlugIn2PinTo4Pin();
     }
 
     public Battery() {
