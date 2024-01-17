@@ -37,6 +37,8 @@ public class Application {
         System.out.println("Camera version: " + application.getCameraVersion());
         System.out.println("Camera on     : " + application.setCameraOn());
         System.out.println("Camera off    : " + application.setCameraOff());
+
+        autonomousVehicle.getBattery().PlugIn();
     }
 
     public void createCameraPortInstance() {
