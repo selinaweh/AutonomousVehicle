@@ -11,6 +11,7 @@ public abstract class Lidar extends Subscriber{
 
     public abstract void turnOff();
 
+    public abstract boolean isOn();
     @Subscribe
     public void receive(EventLidarOn lidarOn) {
         turnOn();

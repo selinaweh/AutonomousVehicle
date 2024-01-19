@@ -14,6 +14,11 @@ public class GPS extends Subscriber{
     public String getFrequency() {
         return frequency;
     }
+
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+
     @Subscribe
     public void receive(EventGPSOn eventGPSOn) {
         isOn = true;
@@ -24,6 +29,6 @@ public class GPS extends Subscriber{
     }
     @Subscribe
     public void receive(EventGPSConnectSatellite eventGPSConnectSatellite) {
-        // TODO: implement event logic
+        frequency = eventGPSConnectSatellite.getFrequency();
     }
 }

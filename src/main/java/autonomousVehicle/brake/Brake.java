@@ -11,9 +11,8 @@ public class Brake extends Subscriber{
     public int getPercentage() {
         return percentage;
     }
-
     @Subscribe
     public void receive(EventBrakeSet eventBrakeSet) {
-        // TODO: implement brake event logic
+        percentage = eventBrakeSet.getPercentage();
     }
 }
