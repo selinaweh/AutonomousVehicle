@@ -1,10 +1,26 @@
 package main;
 
+import Memento.Config;
 import autonomousVehicle.AutonomousVehicle;
+import menu.Menu;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Application {
 
     public static void main(String[] args) {
+        Map<String, String> state = new HashMap<>();
+
+        state.put("rejectDrunkenPassenger", "true");
+        state.put("stopByPoliceRequest", "true");
+        state.put("allowDriveByNight", "true");
+        state.put("behaviorWithNaggingPassengers", "stopAndWaitForExcuse");
+        state.put("musicDuringDrive", "ac/dc");
+
+        Config config = new Config(state);
+
+        Menu menu = new Menu(config);
 
         AutonomousVehicle autonomousVehicle = new AutonomousVehicle.Builder()
                 .Chassis()
