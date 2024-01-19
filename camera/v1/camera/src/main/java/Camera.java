@@ -1,8 +1,9 @@
 import java.lang.reflect.Method;
-import java.util.Arrays;
+
 public class Camera {
     private static final Camera instance = new Camera();
     public Port port;
+    private boolean isOn = false;
 
     private Camera() {
         port = new Port();
@@ -12,16 +13,19 @@ public class Camera {
         return instance;
     }
 
+    public boolean innerIsOn() {
+        return isOn;
+    }
     public String innerVersion() {
         return "CameraV1";
     }
 
     public boolean innerOn() {
-        return true;
+        return isOn = true;
     }
 
     public boolean innerOff() {
-        return false;
+        return isOn = false;
     }
 
     public class Port implements ICamera {
@@ -31,6 +35,9 @@ public class Camera {
             return innerVersion();
         }
 
+        public boolean isOn() {
+            return innerIsOn();
+        }
         public boolean cameraOn() {
             return innerOn();
         }

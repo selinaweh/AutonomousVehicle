@@ -5,9 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa8b55f1-beac-41bc-afa4-3a58f940ced6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/AutonomousVehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/AutonomousVehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Camera.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Chassis.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Chassis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Wheel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Wheel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/brake/Brake.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/brake/Brake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/centralUnit/CentralUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/centralUnit/CentralUnit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/gps/GPS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/gps/GPS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/lidar/LidarNG.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/lidar/LidarNG.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/configuration/CameraType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/configuration/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/configuration/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/main/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/main/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/test/java/TestClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/test/java/autonomousVehicle/BuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/test/java/autonomousVehicle/BuilderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,10 +75,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2b2FVQ4cgtggGKodmvcutWGYJpH" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -84,7 +98,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/GitHub/AutonomousVehicle/camera/v2/camera",
+    "last_opened_file_path": "C:/Users/Weh/IdeaProjects/AutonomousVehicle/camera/v1/camera",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -126,6 +140,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-f98dd351" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -141,6 +162,7 @@
       <workItem from="1705409213638" duration="985000" />
       <workItem from="1705410232478" duration="14000" />
       <workItem from="1705422468985" duration="376000" />
+      <workItem from="1705598666744" duration="514000" />
     </task>
     <servers />
   </component>

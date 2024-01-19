@@ -4,6 +4,7 @@ public class Camera {
     private static final Camera instance = new Camera();
     public Port port;
 
+    public boolean isOn = false;
     private Camera() {
         port = new Port();
     }
@@ -12,21 +13,28 @@ public class Camera {
         return instance;
     }
 
+    public boolean innerIsOn() {
+        return isOn;
+    }
+
     public String innerVersion() {
         return "CameraV2";
     }
 
     public boolean innerOn() {
-        return true;
+        return isOn = true;
     }
 
     public boolean innerOff() {
-        return false;
+        return isOn = false;
     }
 
     public class Port implements ICamera {
         private final Method[] methods = getClass().getMethods();
 
+        public boolean isOn() {
+            return innerIsOn();
+        }
         public String version() {
             return innerVersion();
         }
