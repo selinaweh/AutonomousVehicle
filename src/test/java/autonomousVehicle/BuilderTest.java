@@ -27,7 +27,7 @@ class BuilderTest {
                 build();
 
         assertNotNull(av.getBattery());
-        assertNotNull(av.getCamera());
+        assertNotNull(av.getCameraPorts());
         assertNotNull(av.getGps());
         assertNotNull(av.getLidar());
         assertNotNull(av.getChassis());
