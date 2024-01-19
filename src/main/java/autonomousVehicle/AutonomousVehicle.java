@@ -1,6 +1,14 @@
 package autonomousVehicle;
 
 import autonomousVehicle.battery.Battery;
+import autonomousVehicle.body.Chassis;
+import autonomousVehicle.body.Door;
+import autonomousVehicle.body.Seat;
+import autonomousVehicle.body.Wheel;
+import autonomousVehicle.camera.CameraBuilder;
+import autonomousVehicle.centralUnit.CentralUnit;
+import com.google.common.eventbus.EventBus;
+import autonomousVehicle.camera.CameraMediator;
 import autonomousVehicle.electricEngine.ElectricEngine;
 import autonomousVehicle.gps.GPS;
 import autonomousVehicle.lidar.Lidar;
@@ -10,6 +18,8 @@ import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
 import autonomousVehicle.brake.Brake;
 import configuration.Configuration;
+
+import java.util.ArrayList;
 
 public class AutonomousVehicle {
 
@@ -25,8 +35,10 @@ public class AutonomousVehicle {
     private final Wheel[] wheel;
     private final Brake[] brake;
     private final GPS[] gps;
-    private final Camera[] camera;
+    private final ArrayList<Object> cameraPorts;
     private final Lidar[] lidar;
+    private final EventBus eventBus;
+    private final CentralUnit centralUnit;
 
     //endregion
 
@@ -71,8 +83,8 @@ public class AutonomousVehicle {
         return gps;
     }
 
-    public Camera[] getCamera() {
-        return camera;
+    public ArrayList<Object> getCameraPorts() {
+        return cameraPorts;
     }
 
     public Lidar[] getLidar() {
@@ -80,6 +92,10 @@ public class AutonomousVehicle {
     }
     public ElectricEngine getElectricEngine() {
         return electricEngine;
+    }
+
+    public CentralUnit getCentralUnit() {
+        return centralUnit;
     }
     //endregion
 
@@ -90,7 +106,7 @@ public class AutonomousVehicle {
         this.battery = builder.battery;
         this.brake = builder.brake;
         this.brakeLight = builder.brakeLight;
-        this.camera = builder.camera;
+        this.cameraPorts = builder.cameraPorts;
         this.door = builder.door;
         this.gps = builder.gps;
         this.indicator = builder.indicator;
@@ -98,12 +114,15 @@ public class AutonomousVehicle {
         this.lidar = builder.lidar;
         this.seat = builder.seat;
         this.wheel = builder.wheel;
+        this.eventBus = builder.eventBus;
+        this.centralUnit = builder.centralUnit;
     }
     //endregion
 
     //region BUILDER
     public static class Builder {
-
+        private EventBus eventBus;
+        private CentralUnit centralUnit;
         private Chassis chassis;
         private ElectricEngine electricEngine;
         private Battery battery;
@@ -115,108 +134,131 @@ public class AutonomousVehicle {
         private Wheel[] wheel;
         private Brake[] brake;
         private GPS[] gps;
-        private Camera[] camera;
+        private ArrayList<Object> cameraPorts;
         private Lidar[] lidar;
+        public Builder(){
+            this.eventBus = new EventBus();
+            this.centralUnit = new CentralUnit(this.eventBus);
+        }
 
         public Builder Chassis() {
-            chassis = new Chassis();
+            this.chassis = new Chassis();
             return this;
         }
 
         public Builder ElectricEngine() {
-            electricEngine = Configuration.INSTANCE.engineType;
+            this.electricEngine = Configuration.INSTANCE.engineType;
             return this;
         }
 
         public Builder Battery() {
-
-            battery = new Battery();
+            this.battery = new Battery();
             return this;
         }
 
         public Builder LEDHeadlight() {
-            ledHeadLight = new LEDHeadlight[4];
+            this.ledHeadLight = new LEDHeadlight[4];
             for (int i = 0; i < 4; i++) {
-                ledHeadLight[i] = new LEDHeadlight();
+                this.ledHeadLight[i] = new LEDHeadlight();
             }
             return this;
         }
 
         public Builder BrakeLight() {
-            brakeLight = new BrakeLight[4];
+            this.brakeLight = new BrakeLight[4];
             for (int i = 0; i < 4; i++) {
-                brakeLight[i] = new BrakeLight();
+                this.brakeLight[i] = new BrakeLight();
             }
             return this;
         }
 
         public Builder Indicator() {
-            indicator = new Indicator[4];
+            this.indicator = new Indicator[4];
             for (int i = 0; i < 2; i++) {
-                indicator[i] = new Indicator(Position.LEFT);
+                this.indicator[i] = new Indicator(Position.LEFT);
             }
             for (int i = 2; i < 4; i++) {
-                indicator[i] = new Indicator(Position.RIGHT);
+                this.indicator[i] = new Indicator(Position.RIGHT);
             }
             return this;
         }
 
         public Builder Door() {
-            door = new Door[4];
+            this.door = new Door[4];
             for (int i = 0; i < 4; i++) {
-                door[i] = new Door();
+                this.door[i] = new Door();
             }
             return this;
         }
 
         public Builder Seat() {
-            seat = new Seat[2];
-            seat[0] = new Seat();
-            seat[1] = new Seat();
+            this.seat = new Seat[2];
+            this.seat[0] = new Seat();
+            this.seat[1] = new Seat();
             return this;
         }
 
         public Builder Wheel() {
-            wheel = new Wheel[4];
+            this.wheel = new Wheel[4];
             for (int i = 0; i < 4; i++) {
-                wheel[i] = new Wheel();
+                this.wheel[i] = new Wheel();
             }
             return this;
         }
 
         public Builder Brake() {
-            brake = new Brake[4];
+            this.brake = new Brake[4];
             for (int i = 0; i < 4; i++) {
-                brake[i] = new Brake();
+                this.brake[i] = new Brake();
             }
             return this;
         }
 
         public Builder GPS() {
-            gps = new GPS[2];
-            gps[0] = new GPS();
-            gps[1] = new GPS();
+            this.gps = new GPS[2];
+            this.gps[0] = new GPS();
+            this.gps[1] = new GPS();
             return this;
         }
 
         public Builder Camera() {
-            //TODO: add camera
-            camera = new Camera[2];
+            CameraBuilder cameraBuilder = new CameraBuilder();
+            this.cameraPorts = cameraBuilder.buildCameras(Configuration.INSTANCE.pathToJavaArchive);
             return this;
         }
 
         public Builder Lidar() {
-            lidar = new Lidar[2];
-            lidar[0] = Configuration.INSTANCE.lidar;
-            lidar[1] = Configuration.INSTANCE.lidar;
+            this.lidar = new Lidar[2];
+            this.lidar[0] = Configuration.INSTANCE.lidar;
+            this.lidar[1] = Configuration.INSTANCE.lidar;
             return this;
         }
 
         public AutonomousVehicle build() {
+            registerSubscribers();
             return new AutonomousVehicle(this);
         }
-
+        private <T> void registerComponents(T[] components) {
+            if (components != null) {
+                for (T component : components) {
+                    eventBus.register(component);
+                }
+            }
+        }
+        private void registerSubscribers(){
+            registerComponents(this.lidar);
+            registerComponents(this.gps);
+            registerComponents(this.brake);
+            registerComponents(this.indicator);
+            registerComponents(this.brakeLight);
+            registerComponents(this.ledHeadLight);
+            eventBus.register(this.battery);
+            eventBus.register(new CameraMediator(this.cameraPorts));
+            eventBus.register(this.electricEngine);
+        }
     }
     //endregion
-
+    public void startSimulation(){
+        this.centralUnit.startup();
+    }
 }

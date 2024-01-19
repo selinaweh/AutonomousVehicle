@@ -15,11 +15,14 @@ public enum Configuration {
     INSTANCE;
 
     public final String userDirectory = System.getProperty("user.dir");
+    public final String fileSeparator = FileSystems.getDefault().getSeparator();
+    public final String pathToJavaArchive = userDirectory + fileSeparator + "camera" + fileSeparator + getCameraType() + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "camera.jar";
+    public final int numberOfCameras = 4;
+    private final JSONObject jsonObject = readConfiguration();
+    public final ElectricEngine engineType = getEngineType();
+    public final Lidar lidar = getLidarType();
 
-    private final JSONObject jsonObject = ReadConfiguration();
-
-    private JSONObject ReadConfiguration() {
-
+    private JSONObject readConfiguration() {
         try {
             FileReader fileReader = new FileReader(userDirectory + "/configuration.json");
             JSONTokener jsonTokener = new JSONTokener(fileReader);
@@ -28,15 +31,12 @@ public enum Configuration {
             return jsonObject;
 
         } catch (Exception e) {
-            System.out.println("configuration.json File not found");
+            System.out.println("configuration.json file not found");
             return null;
         }
     }
 
-    public final ElectricEngine engineType = GetEngineType();
-    public final Lidar lidar = GetLidarType();
-
-    private Lidar GetLidarType() {
+    private Lidar getLidarType() {
         String lidarType = jsonObject.getString("lidarType");
         if (lidarType.equals("LidarXT")) {
             return new LidarXT();
@@ -47,7 +47,7 @@ public enum Configuration {
         }
     }
 
-    private ElectricEngine GetEngineType() {
+    private ElectricEngine getEngineType() {
         String engineType = jsonObject.getString("engineType");
         if (engineType.equals("EngineX")) {
             return new EngineX();
@@ -57,9 +57,6 @@ public enum Configuration {
             return null;
         }
     }
-
-    public final String fileSeparator = FileSystems.getDefault().getSeparator();
-    public final String pathToJavaArchive = userDirectory + fileSeparator + "camera" + fileSeparator + getCameraType() + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "camera.jar";
 
     public String getCameraType(){
         try {
@@ -72,7 +69,5 @@ public enum Configuration {
             System.out.println(e.getMessage());
             return null;
         }
-
-
     }
 }
