@@ -17,14 +17,12 @@ import events.lights.ledHeadlight.*;
 public class CentralUnit implements ICentralUnit{
     private final EventBus eventBus;
 
-    public CentralUnit() {
-        this.eventBus = new EventBus();
+    public CentralUnit(EventBus eventBus) {
+        this.eventBus = eventBus;
     }
-    public void addSubscriber(Subscriber subscriber) {
-        eventBus.register(subscriber);
-    }
-    public void removeSubscriber(Subscriber subscriber) {
-        eventBus.unregister(subscriber);
+
+    public EventBus getEventBus() {
+        return eventBus;
     }
 
     @Override
