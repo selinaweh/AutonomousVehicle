@@ -1,27 +1,37 @@
 package events;
 
 import autonomousVehicle.AutonomousVehicle;
-
+import autonomousVehicle.battery.Battery;
 import autonomousVehicle.brake.Brake;
 import autonomousVehicle.electricEngine.ElectricEngine;
 import autonomousVehicle.gps.GPS;
 import autonomousVehicle.lidar.Lidar;
 import autonomousVehicle.lights.brakeLight.BrakeLight;
+import autonomousVehicle.lights.indicator.Indicator;
 import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
 import com.google.common.eventbus.EventBus;
-import events.battery.*;
-import events.brake.*;
-import events.lights.brakeLight.*;
+import events.brake.EventBrakeSet;
+import events.camera.EventCameraOff;
+import events.camera.EventCameraOn;
+import events.electricEngine.EventDecreaseRPM;
+import events.electricEngine.EventEngineOff;
+import events.electricEngine.EventEngineOn;
+import events.electricEngine.EventIncreaseRPM;
+import events.gps.EventGPSConnectSatellite;
+import events.gps.EventGPSOff;
+import events.gps.EventGPSOn;
+import events.lidar.EventLidarOff;
+import events.lidar.EventLidarOn;
+import events.lights.brakeLight.EventBrakeLightOff;
+import events.lights.brakeLight.EventBrakeLightOn;
 import events.lights.indicator.*;
-import events.lights.ledHeadlight.*;
-import events.camera.*;
-import events.electricEngine.*;
-import events.gps.*;
-import events.lidar.*;
-import autonomousVehicle.lights.indicator.Indicator;
-import org.junit.jupiter.api.Test;
+import events.lights.ledHeadlight.EventLEDDimmed;
+import events.lights.ledHeadlight.EventLEDHighBeam;
+import events.lights.ledHeadlight.EventLEDOff;
+import events.lights.ledHeadlight.EventLEDOn;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 
@@ -48,7 +58,6 @@ public class TestEvents {
                 .Lidar()
                 .build();
     }
-    // TODO: test battery events
 
     // test brake events
     @Test
@@ -62,7 +71,7 @@ public class TestEvents {
     // test brake light events
     @Test
     public void testEventBrakeLightOnOffForAllBrakeLights() {
-        for(BrakeLight brakeLight : autonomousVehicle.getBrakeLight()) {
+        for (BrakeLight brakeLight : autonomousVehicle.getBrakeLight()) {
             brakeLight.receive(new EventBrakeLightOn());
             assertTrue(brakeLight.isOn());
             brakeLight.receive(new EventBrakeLightOff());
@@ -102,6 +111,7 @@ public class TestEvents {
                 assertFalse(indicator.isRightIndicatorOn());
         }
     }
+
     @Test
     public void testEventIndicatorHazardWarningForAllIndicators() {
         for (Indicator indicator : autonomousVehicle.getIndicator()) {
@@ -128,6 +138,7 @@ public class TestEvents {
             assertFalse(ledHeadlight.isLEDDimmed());
         }
     }
+
     @Test
     public void testEventLEDDimmedForAllLEDHeadlights() {
         for (LEDHeadlight ledHeadlight : autonomousVehicle.getLedHeadLight()) {
@@ -138,6 +149,7 @@ public class TestEvents {
             assertTrue(ledHeadlight.isLEDDimmed());
         }
     }
+
     @Test
     public void testEventLEDHighBeamForAllLEDHeadlights() {
         for (LEDHeadlight ledHeadlight : autonomousVehicle.getLedHeadLight()) {
@@ -201,6 +213,7 @@ public class TestEvents {
             assertFalse(gps.isOn());
         }
     }
+
     @Test
     public void testEventGPSConnectSatellite() {
         for (GPS gps : autonomousVehicle.getGps()) {
@@ -219,4 +232,28 @@ public class TestEvents {
             assertFalse(lidar.isOn());
         }
     }
+
+    // test battery events
+    @Test
+    public void testBatteryEnergyStateChange() {
+        Battery battery = autonomousVehicle.getBattery();
+        assertEquals(0, battery.getDirectEnergy());
+        battery.setEnergy(1);
+        assertEquals(1, battery.getDirectEnergy());
+    }
+
+    @Test
+    public void testBatteryEnergyStateChangeInvalidValue() {
+        Battery battery = autonomousVehicle.getBattery();
+        battery.setEnergy(5);
+        assertEquals(0, battery.getDirectEnergy());
+    }
+
+    @Test
+    public void testLowBatteryEvent() {
+        Battery battery = autonomousVehicle.getBattery();
+        battery.setEnergy(0);
+        battery.checkAndPostLowBatteryEvent();
+    }
 }
+
