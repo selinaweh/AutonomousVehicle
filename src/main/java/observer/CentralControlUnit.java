@@ -1,11 +1,17 @@
 package observer;
 
+import command.ElectronicKey;
+
 public class CentralControlUnit implements ISubject{
     private final UltrasonicSensor[] sensors;
     private int batteryTemperature;
     private int distance;
+    private boolean isActive;
+    private String encryptedPassword;
 
-    public CentralControlUnit(){
+    public CentralControlUnit(String encryptedPassword){
+        this.encryptedPassword = encryptedPassword;
+        this.isActive = false;
         sensors = new UltrasonicSensor[8];
         for (int i = 0; i < 8; i++){
             sensors[i] = new UltrasonicSensor(0, 0);
@@ -21,6 +27,18 @@ public class CentralControlUnit implements ISubject{
             sensors[i].setDistance(sensor.getDistance());
             i++;
         }
+    }
+
+    public void activate(String encryptedPassword, ElectronicKey eKey) throws Exception{
+        if (this.encryptedPassword.equals(encryptedPassword)){
+            this.isActive = !this.isActive;
+        } else {
+            throw new Exception("Wrong password");
+        }
+    }
+
+    public boolean isActive(){
+        return this.isActive;
     }
 
     public UltrasonicSensor[] getSensors() {

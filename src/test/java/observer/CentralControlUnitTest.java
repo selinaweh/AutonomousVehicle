@@ -1,16 +1,22 @@
 package observer;
 
+import command.ElectronicKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CentralControlUnitTest {
 
     private CentralControlUnit centralControlUnit;
+
     @BeforeEach
-    public void Init(){
-        centralControlUnit = new CentralControlUnit();
+    public void Init() throws Exception {
+        ElectronicKey eKey = new ElectronicKey();
+        String password = "ZooxSDC73";
+        String encryptedPassword = eKey.encrypt(password);
+        centralControlUnit = new CentralControlUnit(encryptedPassword);
+        centralControlUnit.activate(encryptedPassword, eKey);
     }
 
     @Test
