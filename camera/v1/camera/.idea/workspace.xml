@@ -6,22 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="aa8b55f1-beac-41bc-afa4-3a58f940ced6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../configuration.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../configuration.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/AutonomousVehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/AutonomousVehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Camera.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Chassis.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Chassis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Seat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/Wheel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/body/Wheel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/brake/Brake.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/brake/Brake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/camera/CameraBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/camera/CameraBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/camera/CameraMediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/camera/CameraMediator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/centralUnit/CentralUnit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/centralUnit/CentralUnit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/gps/GPS.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/gps/GPS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/lidar/LidarNG.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/lidar/LidarNG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/configuration/CameraType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/electricEngine/ElectricEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/autonomousVehicle/electricEngine/ElectricEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../src/main/java/configuration/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/configuration/Configuration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/main/java/main/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/main/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/test/java/TestClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../src/test/java/autonomousVehicle/BuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/test/java/autonomousVehicle/BuilderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/configuration/JSONConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/configuration/JSONConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../src/main/java/configuration/SignatureVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../src/main/java/signatureVerification/SignatureVerifier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,30 +80,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build camera.executor": "Run",
-    "Gradle.Upgrade Gradle wrapper.executor": "Run",
-    "Gradle.camera [jar].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Weh/IdeaProjects/AutonomousVehicle/camera/v1/camera",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.43606254",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build camera.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Upgrade Gradle wrapper.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.camera [jar].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Weh/IdeaProjects/AutonomousVehicle/camera/v1/camera&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.43606254&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="camera [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -163,6 +156,7 @@
       <workItem from="1705410232478" duration="14000" />
       <workItem from="1705422468985" duration="376000" />
       <workItem from="1705598666744" duration="514000" />
+      <workItem from="1705745024586" duration="657000" />
     </task>
     <servers />
   </component>
