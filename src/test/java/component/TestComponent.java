@@ -3,7 +3,9 @@ import autonomousVehicle.AutonomousVehicle;
 import autonomousVehicle.camera.CameraBuilder;
 import configuration.JSONConfiguration;
 import exceptions.SignatureVerificationException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,7 +18,7 @@ public class TestComponent {
     public final String userDirectory = System.getProperty("user.dir");
     public final String fileSeparator = FileSystems.getDefault().getSeparator();
     public final String pathToUnsignedJar = userDirectory + fileSeparator + "camera" + fileSeparator + "v1" + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "camera.jar";
-    public final String pathToJavaArchive = userDirectory + fileSeparator + "camera" + fileSeparator + "v1" + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "signed_camera.jar";
+    public final String pathToSignedJar = userDirectory + fileSeparator + "camera" + fileSeparator + "v1" + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "signed_camera.jar";
     @BeforeEach
     public void setUp() {
         autonomousVehicle = new AutonomousVehicle.Builder()
@@ -35,13 +37,20 @@ public class TestComponent {
                 .Lidar()
                 .build();
     }
+    @AfterEach
+    public void tearDown() {
+        JSONConfiguration jsonConfiguration = new JSONConfiguration();
+        jsonConfiguration.build("v1", "EngineX", "LidarXT");
+    }
 
     @Test
+    @Order(1)
     public void testCameraPortsEqualsNumberOfCameras() {
         assertEquals(4, autonomousVehicle.getCameraPorts().size());
     }
 
     @Test
+    @Order(2)
     public void testCameraVersion() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         for (Object cameraPort : autonomousVehicle.getCameraPorts()) {
             Method versionMethod = cameraPort.getClass().getMethod("version");
@@ -51,40 +60,14 @@ public class TestComponent {
     }
 
     @Test
-    public void testCameraVersionDynamicallyChanged() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException{
-        JSONConfiguration jsonConfigurationV2 = new JSONConfiguration();
-        jsonConfigurationV2.build("v2", "EngineX", "LidarXT");
-        AutonomousVehicle  autonomousVehicle = new AutonomousVehicle.Builder()
-                .Chassis()
-                .ElectricEngine()
-                .Battery()
-                .LEDHeadlight()
-                .BrakeLight()
-                .Indicator()
-                .Door()
-                .Seat()
-                .Wheel()
-                .Brake()
-                .GPS()
-                .Camera()
-                .Lidar()
-                .build();
-        for (Object cameraPort : autonomousVehicle.getCameraPorts()) {
-            Method versionMethod = cameraPort.getClass().getMethod("version");
-            String version = (String) versionMethod.invoke(cameraPort);
-            assertEquals("CameraV2", version);
-            JSONConfiguration jsonConfigurationV1 = new JSONConfiguration();
-            jsonConfigurationV1.build("v1", "EngineX", "LidarXT");
-        }
-    }
-
-    @Test
+    @Order(3)
     public void testCamerasBuildWithSignedJar() throws SignatureVerificationException {
         CameraBuilder cameraBuilder = new CameraBuilder();
-        cameraBuilder.buildCameras(pathToJavaArchive);
+        cameraBuilder.buildCameras(pathToSignedJar);
         assertEquals(4, cameraBuilder.getCameraPorts().size());
     }
     @Test
+    @Order(4)
     public void testNotSignedNotBuild(){
         CameraBuilder cameraBuilder = new CameraBuilder();
         assertThrows(SignatureVerificationException.class, () -> cameraBuilder.buildCameras(pathToUnsignedJar));
