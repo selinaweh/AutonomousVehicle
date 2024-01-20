@@ -1,4 +1,4 @@
-package configuration;
+package signatureVerification;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

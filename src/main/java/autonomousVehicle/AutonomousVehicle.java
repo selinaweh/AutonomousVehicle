@@ -7,6 +7,7 @@ import autonomousVehicle.body.Seat;
 import autonomousVehicle.body.Wheel;
 import autonomousVehicle.camera.CameraBuilder;
 import autonomousVehicle.centralUnit.CentralUnit;
+import autonomousVehicle.electricEngine.EngineBrakeMediator;
 import com.google.common.eventbus.EventBus;
 import autonomousVehicle.camera.CameraMediator;
 import autonomousVehicle.electricEngine.ElectricEngine;
@@ -18,6 +19,8 @@ import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
 import autonomousVehicle.brake.Brake;
 import configuration.Configuration;
+import exceptions.InvalidVehicleStateException;
+import exceptions.SignatureVerificationException;
 
 import java.util.ArrayList;
 
@@ -186,7 +189,7 @@ public class AutonomousVehicle {
         public Builder Door() {
             this.door = new Door[4];
             for (int i = 0; i < 4; i++) {
-                this.door[i] = new Door();
+                this.door[i] = new Door(false);
             }
             return this;
         }
@@ -222,8 +225,13 @@ public class AutonomousVehicle {
         }
 
         public Builder Camera() {
-            CameraBuilder cameraBuilder = new CameraBuilder();
-            this.cameraPorts = cameraBuilder.buildCameras(Configuration.INSTANCE.pathToJavaArchive);
+            try {
+                CameraBuilder cameraBuilder = new CameraBuilder();
+                this.cameraPorts = cameraBuilder.buildCameras(Configuration.INSTANCE.pathToJavaArchive);
+            } catch (SignatureVerificationException e) {
+                System.out.println("Error: " + e.getMessage());
+                System.exit(1);
+            }
             return this;
         }
 
@@ -255,10 +263,23 @@ public class AutonomousVehicle {
             eventBus.register(this.battery);
             eventBus.register(new CameraMediator(this.cameraPorts));
             eventBus.register(this.electricEngine);
+            eventBus.register(new EngineBrakeMediator(this.centralUnit.getEventBus()));
         }
     }
     //endregion
     public void startSimulation(){
-        this.centralUnit.startup();
+        try{
+
+            this.centralUnit.startup();
+            this.centralUnit.move(50, 1);
+            this.centralUnit.leftTurn(30, 1);
+            this.centralUnit.rightTurn(30, 1);
+            this.centralUnit.move(50, 1);
+            this.centralUnit.stop();
+            this.centralUnit.shutdown();
+        }catch(InvalidVehicleStateException e){
+            System.out.println("Error: " + e.getMessage());
+            System.exit(1);
+        }
     }
 }

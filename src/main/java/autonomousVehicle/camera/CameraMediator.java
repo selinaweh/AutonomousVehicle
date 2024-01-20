@@ -2,7 +2,7 @@ package autonomousVehicle.camera;
 
 import autonomousVehicle.Subscriber;
 import com.google.common.eventbus.Subscribe;
-import configuration.Configuration;
+
 import events.camera.EventCameraOff;
 import events.camera.EventCameraOn;
 
@@ -26,7 +26,6 @@ public class CameraMediator extends Subscriber {
             for (Object cameraPort : cameraPorts) {
                 Method cameraOnMethod = cameraPort.getClass().getDeclaredMethod("cameraOn");
                 Boolean on = (Boolean) cameraOnMethod.invoke(cameraPort);
-                System.out.println("Camera on     : " + on);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -39,7 +38,6 @@ public class CameraMediator extends Subscriber {
             for (Object cameraPort : cameraPorts) {
                 Method cameraOffMethod = cameraPort.getClass().getDeclaredMethod("cameraOff");
                 Boolean off = (Boolean) cameraOffMethod.invoke(cameraPort);
-                System.out.println("Camera off     : " + off);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

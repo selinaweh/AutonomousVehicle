@@ -1,4 +1,4 @@
-package Memento;
+package memento;
 
 import java.util.Map;
 

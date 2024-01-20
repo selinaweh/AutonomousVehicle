@@ -1,6 +1,6 @@
 package main;
 
-import Memento.Config;
+import memento.Config;
 import autonomousVehicle.AutonomousVehicle;
 import menu.Menu;
 

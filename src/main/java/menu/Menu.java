@@ -1,7 +1,7 @@
 package menu;
 
-import Memento.Config;
-import Memento.ConfigCaretaker;
+import memento.Config;
+import memento.ConfigCaretaker;
 
 import java.util.Scanner;
 
@@ -12,7 +12,6 @@ public class Menu {
     public Menu(Config config){
         this.config = config;
         caretaker.setSaveConfig(config.Save());
-        config.PrintConfig();
         MenuLoop();
     }
 
@@ -26,30 +25,34 @@ public class Menu {
         System.out.println("[iv] exit");
 
         String input = scanner.nextLine();
-
-        switch (input){
-            case "i":
-                Print();
-                MenuLoop();
-                config.PrintConfig();
-                break;
-            case "ii":
-                SetParameter();
-                config.PrintConfig();
-                MenuLoop();
-                break;
-            case "iii":
-                config.Undo(caretaker.getSaveConfig());
-                config.PrintConfig();
-                MenuLoop();
-                break;
-            case "iv":
-                break;
+        do {
+            switch (input){
+                case "i":
+                    config.PrintConfig();
+                    MenuLoop();
+                    config.PrintConfig();
+                    break;
+                case "ii":
+                    SetParameter();
+                    config.PrintConfig();
+                    MenuLoop();
+                    break;
+                case "iii":
+                    config.Undo(caretaker.getSaveConfig());
+                    config.PrintConfig();
+                    MenuLoop();
+                    break;
+                case "iv":
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Wrong Input [i], [ii] , [iii], [iv]");
+            }
         }
-    }
-
-    private void Print(){
-
+        while (!input.equals("i") &&
+                !input.equals("ii") &&
+                !input.equals("iii") &&
+                !input.equals("iv"));
     }
 
     private void SetParameter(){
