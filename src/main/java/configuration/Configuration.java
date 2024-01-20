@@ -1,4 +1,5 @@
 package configuration;
+
 import autonomousVehicle.electricEngine.ElectricEngine;
 import autonomousVehicle.electricEngine.EngineNG;
 import autonomousVehicle.electricEngine.EngineX;
@@ -58,7 +59,7 @@ public enum Configuration {
         }
     }
 
-    public String getCameraType(){
+    public String getCameraType() {
         try {
             FileReader fileReader = new FileReader("configuration.json");
             JSONTokener jsonTokener = new JSONTokener(fileReader);

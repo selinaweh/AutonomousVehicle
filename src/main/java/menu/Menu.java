@@ -6,16 +6,16 @@ import memento.ConfigCaretaker;
 import java.util.Scanner;
 
 public class Menu {
-    private Config config;
     private final ConfigCaretaker caretaker = new ConfigCaretaker();
+    private Config config;
 
-    public Menu(Config config){
+    public Menu(Config config) {
         this.config = config;
         caretaker.setSaveConfig(config.Save());
         MenuLoop();
     }
 
-    private void MenuLoop(){
+    private void MenuLoop() {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -26,7 +26,7 @@ public class Menu {
 
         String input = scanner.nextLine();
         do {
-            switch (input){
+            switch (input) {
                 case "i":
                     config.PrintConfig();
                     MenuLoop();
@@ -59,14 +59,14 @@ public class Menu {
                 !input.equals("-config"));
     }
 
-    private void SetParameter(){
+    private void SetParameter() {
         Scanner scanner = new Scanner(System.in);
         String inputId;
         do {
             System.out.println("Give id of Parameter: ");
             inputId = scanner.nextLine();
 
-            switch (inputId){
+            switch (inputId) {
                 case "rejectDrunkenPassenger", "stopByPoliceRequest", "allowDriveByNight", "behaviorWithNaggingPassengers", "musicDuringDrive":
                     config.SetParameters(inputId, AllowedValues(inputId));
                     break;
@@ -82,18 +82,18 @@ public class Menu {
                 !inputId.equals("musicDuringDrive"));
     }
 
-    private String AllowedValues(String inputId){
+    private String AllowedValues(String inputId) {
         Scanner scanner = new Scanner(System.in);
         String allowedValues = "";
 
-        switch (inputId){
+        switch (inputId) {
             case "rejectDrunkenPassenger", "stopByPoliceRequest", "allowDriveByNight":
                 System.out.println("enter value for [" + inputId + "]"
                         + " | current " + config.getState().get("rejectDrunkenPassenger")
                         + " | allowed true | false: ");
                 do {
                     allowedValues = scanner.nextLine();
-                    switch (allowedValues){
+                    switch (allowedValues) {
                         case "true", "false":
                             System.out.println("new value " + allowedValues);
                             break;
@@ -110,7 +110,7 @@ public class Menu {
                         + " | allowed doNothing | stopAndWaitForExcuse: ");
                 do {
                     allowedValues = scanner.nextLine();
-                    switch (allowedValues){
+                    switch (allowedValues) {
                         case "doNothing", "stopAndWaitForExcuse":
                             System.out.println("new value " + allowedValues);
                             break;
@@ -127,7 +127,7 @@ public class Menu {
                         + " | allowed ac/dc | Helene Fischer: ");
                 do {
                     allowedValues = scanner.nextLine();
-                    switch (allowedValues){
+                    switch (allowedValues) {
                         case "ac/dc", "Helene Fischer":
                             System.out.println("new value " + allowedValues);
                             break;

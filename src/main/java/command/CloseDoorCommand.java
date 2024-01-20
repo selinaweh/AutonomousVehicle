@@ -5,7 +5,7 @@ import autonomousVehicle.body.Door;
 public class CloseDoorCommand implements ICommand {
     Door door;
 
-    public CloseDoorCommand(Door door){
+    public CloseDoorCommand(Door door) {
         this.door = door;
     }
 

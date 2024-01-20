@@ -2,8 +2,10 @@ package autonomousVehicle.lidar;
 
 public class LidarNG extends Lidar {
     private boolean isOn = false;
+
     public LidarNG() {
     }
+
     @Override
     public boolean isOn() {
         return isOn;

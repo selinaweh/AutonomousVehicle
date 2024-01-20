@@ -1,9 +1,11 @@
 package autonomousVehicle.lidar;
 
-public class LidarXT  extends Lidar{
+public class LidarXT extends Lidar {
     private boolean isOn = false;
+
     public LidarXT() {
     }
+
     @Override
     public boolean isOn() {
         return isOn;
@@ -11,8 +13,8 @@ public class LidarXT  extends Lidar{
 
     @Override
     public void turnOn() {
-            isOn = true;
-        }
+        isOn = true;
+    }
 
     @Override
     public void turnOff() {

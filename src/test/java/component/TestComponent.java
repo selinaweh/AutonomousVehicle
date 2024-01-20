@@ -1,4 +1,5 @@
 package component;
+
 import autonomousVehicle.AutonomousVehicle;
 import autonomousVehicle.camera.CameraBuilder;
 import configuration.JSONConfiguration;
@@ -12,13 +13,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.FileSystems;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class TestComponent {
-    private AutonomousVehicle autonomousVehicle;
     public final String userDirectory = System.getProperty("user.dir");
     public final String fileSeparator = FileSystems.getDefault().getSeparator();
     public final String pathToUnsignedJar = userDirectory + fileSeparator + "camera" + fileSeparator + "v1" + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "camera.jar";
     public final String pathToSignedJar = userDirectory + fileSeparator + "camera" + fileSeparator + "v1" + fileSeparator + "camera" + fileSeparator + "build" + fileSeparator + "libs" + fileSeparator + "signed_camera.jar";
+    private AutonomousVehicle autonomousVehicle;
+
     @BeforeEach
     public void setUp() {
         autonomousVehicle = new AutonomousVehicle.Builder()
@@ -37,6 +41,7 @@ public class TestComponent {
                 .Lidar()
                 .build();
     }
+
     @AfterEach
     public void tearDown() {
         JSONConfiguration jsonConfiguration = new JSONConfiguration();
@@ -66,9 +71,10 @@ public class TestComponent {
         cameraBuilder.buildCameras(pathToSignedJar);
         assertEquals(4, cameraBuilder.getCameraPorts().size());
     }
+
     @Test
     @Order(4)
-    public void testNotSignedNotBuild(){
+    public void testNotSignedNotBuild() {
         CameraBuilder cameraBuilder = new CameraBuilder();
         assertThrows(SignatureVerificationException.class, () -> cameraBuilder.buildCameras(pathToUnsignedJar));
         assertEquals(0, cameraBuilder.getCameraPorts().size());

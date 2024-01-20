@@ -8,7 +8,7 @@ import java.util.Base64;
 public class ElectronicKey {
     private static final String ALGORITHM = "AES";
     private static final byte[] keyValue =
-            new byte[] {'Z', 'o', 'o', 'x', 'S', 'D', 'C', '7', '3', 'Z', 'o', 'o', 'x', 'S', 'D', 'C'};
+            new byte[]{'Z', 'o', 'o', 'x', 'S', 'D', 'C', '7', '3', 'Z', 'o', 'o', 'x', 'S', 'D', 'C'};
 
     public String encrypt(String password) throws Exception {
         Key key = generateKey();

@@ -5,19 +5,19 @@ import autonomousVehicle.body.Chassis;
 import autonomousVehicle.body.Door;
 import autonomousVehicle.body.Seat;
 import autonomousVehicle.body.Wheel;
+import autonomousVehicle.brake.Brake;
 import autonomousVehicle.camera.CameraBuilder;
-import autonomousVehicle.centralUnit.CentralUnit;
-import autonomousVehicle.electricEngine.EngineBrakeMediator;
-import com.google.common.eventbus.EventBus;
 import autonomousVehicle.camera.CameraMediator;
+import autonomousVehicle.centralUnit.CentralUnit;
 import autonomousVehicle.electricEngine.ElectricEngine;
+import autonomousVehicle.electricEngine.EngineBrakeMediator;
 import autonomousVehicle.gps.GPS;
 import autonomousVehicle.lidar.Lidar;
 import autonomousVehicle.lights.brakeLight.BrakeLight;
 import autonomousVehicle.lights.indicator.Indicator;
 import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
-import autonomousVehicle.brake.Brake;
+import com.google.common.eventbus.EventBus;
 import configuration.Configuration;
 import exceptions.InvalidVehicleStateException;
 import exceptions.SignatureVerificationException;
@@ -44,6 +44,25 @@ public class AutonomousVehicle {
     private final CentralUnit centralUnit;
 
     //endregion
+
+    //region CONSTRUCTOR
+    private AutonomousVehicle(Builder builder) {
+        this.chassis = builder.chassis;
+        this.electricEngine = builder.electricEngine;
+        this.battery = builder.battery;
+        this.brake = builder.brake;
+        this.brakeLight = builder.brakeLight;
+        this.cameraPorts = builder.cameraPorts;
+        this.door = builder.door;
+        this.gps = builder.gps;
+        this.indicator = builder.indicator;
+        this.ledHeadLight = builder.ledHeadLight;
+        this.lidar = builder.lidar;
+        this.seat = builder.seat;
+        this.wheel = builder.wheel;
+        this.eventBus = builder.eventBus;
+        this.centralUnit = builder.centralUnit;
+    }
 
     //region GETTERS
     public Chassis getChassis() {
@@ -93,39 +112,38 @@ public class AutonomousVehicle {
     public Lidar[] getLidar() {
         return lidar;
     }
+
     public ElectricEngine getElectricEngine() {
         return electricEngine;
     }
+    //endregion
 
     public CentralUnit getCentralUnit() {
         return centralUnit;
     }
     //endregion
 
-    //region CONSTRUCTOR
-    private AutonomousVehicle(Builder builder) {
-        this.chassis = builder.chassis;
-        this.electricEngine = builder.electricEngine;
-        this.battery = builder.battery;
-        this.brake = builder.brake;
-        this.brakeLight = builder.brakeLight;
-        this.cameraPorts = builder.cameraPorts;
-        this.door = builder.door;
-        this.gps = builder.gps;
-        this.indicator = builder.indicator;
-        this.ledHeadLight = builder.ledHeadLight;
-        this.lidar = builder.lidar;
-        this.seat = builder.seat;
-        this.wheel = builder.wheel;
-        this.eventBus = builder.eventBus;
-        this.centralUnit = builder.centralUnit;
-    }
     //endregion
+    public void startSimulation() {
+        try {
+
+            this.centralUnit.startup();
+            this.centralUnit.move(50, 1);
+            this.centralUnit.leftTurn(30, 1);
+            this.centralUnit.rightTurn(30, 1);
+            this.centralUnit.move(50, 1);
+            this.centralUnit.stop();
+            this.centralUnit.shutdown();
+        } catch (InvalidVehicleStateException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.exit(1);
+        }
+    }
 
     //region BUILDER
     public static class Builder {
-        private EventBus eventBus;
-        private CentralUnit centralUnit;
+        private final EventBus eventBus;
+        private final CentralUnit centralUnit;
         private Chassis chassis;
         private ElectricEngine electricEngine;
         private Battery battery;
@@ -139,7 +157,8 @@ public class AutonomousVehicle {
         private GPS[] gps;
         private ArrayList<Object> cameraPorts;
         private Lidar[] lidar;
-        public Builder(){
+
+        public Builder() {
             this.eventBus = new EventBus();
             this.centralUnit = new CentralUnit(this.eventBus);
         }
@@ -246,6 +265,7 @@ public class AutonomousVehicle {
             registerSubscribers();
             return new AutonomousVehicle(this);
         }
+
         private <T> void registerComponents(T[] components) {
             if (components != null) {
                 for (T component : components) {
@@ -253,7 +273,8 @@ public class AutonomousVehicle {
                 }
             }
         }
-        private void registerSubscribers(){
+
+        private void registerSubscribers() {
             registerComponents(this.lidar);
             registerComponents(this.gps);
             registerComponents(this.brake);
@@ -264,22 +285,6 @@ public class AutonomousVehicle {
             eventBus.register(new CameraMediator(this.cameraPorts));
             eventBus.register(this.electricEngine);
             eventBus.register(new EngineBrakeMediator(this.centralUnit.getEventBus()));
-        }
-    }
-    //endregion
-    public void startSimulation(){
-        try{
-
-            this.centralUnit.startup();
-            this.centralUnit.move(50, 1);
-            this.centralUnit.leftTurn(30, 1);
-            this.centralUnit.rightTurn(30, 1);
-            this.centralUnit.move(50, 1);
-            this.centralUnit.stop();
-            this.centralUnit.shutdown();
-        }catch(InvalidVehicleStateException e){
-            System.out.println("Error: " + e.getMessage());
-            System.exit(1);
         }
     }
 }

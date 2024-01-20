@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestMemento {
 
@@ -14,7 +15,7 @@ public class TestMemento {
     private ConfigCaretaker caretaker;
 
     @BeforeEach
-    public void Init(){
+    public void Init() {
         caretaker = new ConfigCaretaker();
         state = new HashMap<>();
         state.put("rejectDrunkenPassenger", "true");
@@ -27,7 +28,7 @@ public class TestMemento {
     }
 
     @Test
-    public void TestSave(){
+    public void TestSave() {
         caretaker.setSaveConfig(config.Save());
 
         config.Undo(caretaker.getSaveConfig());
@@ -42,7 +43,7 @@ public class TestMemento {
     }
 
     @Test
-    public void TestUndo(){
+    public void TestUndo() {
         caretaker.setSaveConfig(config.Save());
 
         config.SetParameters("rejectDrunkenPassenger", "false");
@@ -55,7 +56,7 @@ public class TestMemento {
     }
 
     @Test
-    public void TestSetParameters(){
+    public void TestSetParameters() {
         config.SetParameters("rejectDrunkenPassenger", "false");
 
         assertEquals(state.get("rejectDrunkenPassenger"), "false");

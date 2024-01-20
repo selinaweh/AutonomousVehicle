@@ -1,20 +1,28 @@
 package autonomousVehicle.centralUnit;
+
 import com.google.common.eventbus.EventBus;
-
-import events.brake.*;
-import events.camera.*;
-
-import events.electricEngine.*;
-import events.gps.*;
-import events.lidar.*;
-import events.lights.brakeLight.*;
+import events.brake.EventBrakeSet;
+import events.camera.EventCameraOff;
+import events.camera.EventCameraOn;
+import events.electricEngine.EventDecreaseRPM;
+import events.electricEngine.EventEngineOff;
+import events.electricEngine.EventEngineOn;
+import events.electricEngine.EventIncreaseRPM;
+import events.gps.EventGPSConnectSatellite;
+import events.gps.EventGPSOff;
+import events.lidar.EventLidarOff;
+import events.lidar.EventLidarOn;
+import events.lights.brakeLight.EventBrakeLightOff;
+import events.lights.brakeLight.EventBrakeLightOn;
 import events.lights.indicator.*;
-
-import events.lights.ledHeadlight.*;
+import events.lights.ledHeadlight.EventLEDDimmed;
+import events.lights.ledHeadlight.EventLEDHighBeam;
+import events.lights.ledHeadlight.EventLEDOff;
+import events.lights.ledHeadlight.EventLEDOn;
 import exceptions.InvalidVehicleStateException;
 
 
-public class CentralUnit implements ICentralUnit{
+public class CentralUnit implements ICentralUnit {
     private final EventBus eventBus;
     private boolean isEngineOn = false;
     private boolean isMoving = false;

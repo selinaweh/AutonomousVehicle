@@ -1,4 +1,5 @@
 package facade;
+
 import autonomousVehicle.AutonomousVehicle;
 import autonomousVehicle.brake.Brake;
 import autonomousVehicle.gps.GPS;
@@ -7,14 +8,14 @@ import autonomousVehicle.lights.brakeLight.BrakeLight;
 import autonomousVehicle.lights.indicator.Indicator;
 import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class TestFacade {
     private AutonomousVehicle autonomousVehicle;
 
@@ -40,7 +41,7 @@ public class TestFacade {
 
     @Test
     @Order(1)
-    public void testStartup() throws Exception{
+    public void testStartup() throws Exception {
         autonomousVehicle.getCentralUnit().startup();
         // engine on
         assertTrue(autonomousVehicle.getElectricEngine().isOn());
@@ -71,9 +72,9 @@ public class TestFacade {
 
     @Test
     @Order(2)
-    public void testMove(){
+    public void testMove() {
         autonomousVehicle.getCentralUnit().startup();
-        autonomousVehicle.getCentralUnit().move(50,1);
+        autonomousVehicle.getCentralUnit().move(50, 1);
         // indicator left and right off
         for (Indicator indicator : autonomousVehicle.getIndicator()) {
             assertFalse(indicator.isLeftIndicatorOn());
@@ -99,10 +100,10 @@ public class TestFacade {
 
     @Test
     @Order(3)
-    public void testLeftTurn(){
+    public void testLeftTurn() {
         autonomousVehicle.getCentralUnit().startup();
-        autonomousVehicle.getCentralUnit().move(50,1);
-        autonomousVehicle.getCentralUnit().leftTurn(20,1);
+        autonomousVehicle.getCentralUnit().move(50, 1);
+        autonomousVehicle.getCentralUnit().leftTurn(20, 1);
         // indicator left on
         for (Indicator indicator : autonomousVehicle.getIndicator()) {
             if (indicator.getIndicatorLocation() == Position.LEFT)
@@ -123,10 +124,10 @@ public class TestFacade {
 
     @Test
     @Order(4)
-    public void testRightTurn(){
+    public void testRightTurn() {
         autonomousVehicle.getCentralUnit().startup();
-        autonomousVehicle.getCentralUnit().move(50,1);
-        autonomousVehicle.getCentralUnit().rightTurn(30,1);
+        autonomousVehicle.getCentralUnit().move(50, 1);
+        autonomousVehicle.getCentralUnit().rightTurn(30, 1);
         // indicator right on
         for (Indicator indicator : autonomousVehicle.getIndicator()) {
             if (indicator.getIndicatorLocation() == Position.RIGHT)
@@ -147,9 +148,9 @@ public class TestFacade {
 
     @Test
     @Order(5)
-    public void testStop(){
+    public void testStop() {
         autonomousVehicle.getCentralUnit().startup();
-        autonomousVehicle.getCentralUnit().move(50,1);
+        autonomousVehicle.getCentralUnit().move(50, 1);
         autonomousVehicle.getCentralUnit().stop();
         // rpm 0
         assertEquals(0, autonomousVehicle.getElectricEngine().getCurrentRPM());
@@ -165,9 +166,9 @@ public class TestFacade {
 
     @Test
     @Order(6)
-    public void testEmergencyStop() throws Exception{
+    public void testEmergencyStop() throws Exception {
         autonomousVehicle.getCentralUnit().startup();
-        autonomousVehicle.getCentralUnit().move(50,1);
+        autonomousVehicle.getCentralUnit().move(50, 1);
         autonomousVehicle.getCentralUnit().emergencyStop();
         // rpm 0
         assertEquals(0, autonomousVehicle.getElectricEngine().getCurrentRPM());
@@ -201,11 +202,12 @@ public class TestFacade {
         // engine off
         assertFalse(autonomousVehicle.getElectricEngine().isOn());
     }
+
     @Test
     @Order(7)
-    public void testShutdown() throws Exception{
+    public void testShutdown() throws Exception {
         autonomousVehicle.getCentralUnit().startup();
-        autonomousVehicle.getCentralUnit().move(50,1);
+        autonomousVehicle.getCentralUnit().move(50, 1);
         autonomousVehicle.getCentralUnit().stop();
         autonomousVehicle.getCentralUnit().shutdown();
         // rpm 0

@@ -6,7 +6,7 @@ import status.ISensor;
 public class DoorButton implements ISensor {
     private Door door;
 
-    public DoorButton(Door door){
+    public DoorButton(Door door) {
         this.door = door;
     }
 

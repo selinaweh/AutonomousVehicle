@@ -6,7 +6,7 @@ import java.util.Map;
 public class ConfigMemento {
     private Map<String, String> state;
 
-    public ConfigMemento(Map<String, String> state){
+    public ConfigMemento(Map<String, String> state) {
         super();
         this.state = new HashMap<>(state);
     }

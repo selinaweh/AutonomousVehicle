@@ -1,7 +1,5 @@
 package observer;
 
-import jdk.jshell.execution.JdiInitiator;
-
 public class UltrasonicSensor implements IObserver {
     private int batteryTemp;
     private int distance;
@@ -13,18 +11,18 @@ public class UltrasonicSensor implements IObserver {
 
     @Override
     public void Update(int batteryTemperature, int dist) {
-        if (batteryTemp != batteryTemperature){
+        if (batteryTemp != batteryTemperature) {
             batteryTemp = batteryTemperature;
             System.out.println("Temperature changed");
         }
-        if (distance != dist){
+        if (distance != dist) {
             distance = dist;
             System.out.println("Distance changed");
         }
 
     }
 
-    public void SetTempAndDist(int temp, int dist){
+    public void SetTempAndDist(int temp, int dist) {
         Update(temp, dist);
     }
 

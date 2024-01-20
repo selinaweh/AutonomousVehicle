@@ -4,8 +4,9 @@ public class ServiceCenter {
 
     private boolean isAlerted = false;
 
-    public ServiceCenter(){
+    public ServiceCenter() {
     }
+
     public void alert() {
         this.isAlerted = true;
         System.out.println("Emergency alert received at the service center.");

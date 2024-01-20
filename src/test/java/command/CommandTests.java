@@ -3,6 +3,7 @@ package command;
 import autonomousVehicle.body.Door;
 import observer.CentralControlUnit;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandTests {
@@ -45,7 +46,7 @@ public class CommandTests {
     }
 
     @Test
-   public void testServiceCenterAlerted(){
+    public void testServiceCenterAlerted() {
         ServiceCenter serviceCenter = new ServiceCenter();
         new CentralControlUnit("ZooxSDC73");
         EmergencyButton emergencyButton = new EmergencyButton(new OpenDoorCommand(new Door(false)), serviceCenter);

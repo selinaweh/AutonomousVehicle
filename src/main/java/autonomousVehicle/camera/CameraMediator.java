@@ -2,7 +2,6 @@ package autonomousVehicle.camera;
 
 import autonomousVehicle.Subscriber;
 import com.google.common.eventbus.Subscribe;
-
 import events.camera.EventCameraOff;
 import events.camera.EventCameraOn;
 
@@ -16,6 +15,7 @@ public class CameraMediator extends Subscriber {
     public CameraMediator(ArrayList<Object> cameraPorts) {
         this.cameraPorts = cameraPorts;
     }
+
     public void add(CameraBuilder cameraBuilder) {
         cameraPorts.addAll(cameraBuilder.getCameraPorts());
     }

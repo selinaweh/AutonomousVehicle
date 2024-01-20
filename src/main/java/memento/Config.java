@@ -3,24 +3,24 @@ package memento;
 import java.util.Map;
 
 public class Config {
-    private Map<String, String > state;
+    private Map<String, String> state;
 
-    public Config(Map<String, String> state){
+    public Config(Map<String, String> state) {
         super();
         this.state = state;
     }
 
-    public ConfigMemento Save(){
+    public ConfigMemento Save() {
         return new ConfigMemento(state);
     }
 
-    public void Undo(ConfigMemento saveConfig){
+    public void Undo(ConfigMemento saveConfig) {
         state = saveConfig.getState();
     }
 
-    public void PrintConfig(){
+    public void PrintConfig() {
         System.out.println("Config: ");
-        for (Map.Entry<String, String> entry : state.entrySet()){
+        for (Map.Entry<String, String> entry : state.entrySet()) {
             System.out.println(entry.getKey() + " = " + entry.getValue());
         }
     }
@@ -33,7 +33,7 @@ public class Config {
         this.state = state;
     }
 
-    public void SetParameters(String paramName, String value){
+    public void SetParameters(String paramName, String value) {
         state.put(paramName, value);
     }
 
