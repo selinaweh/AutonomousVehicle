@@ -7,12 +7,8 @@ import autonomousVehicle.lights.brakeLight.BrakeLight;
 import autonomousVehicle.lights.indicator.Indicator;
 import autonomousVehicle.lights.indicator.Position;
 import autonomousVehicle.lights.ledHeadlight.LEDHeadlight;
-import events.brake.EventBrakeSet;
-import events.gps.EventGPSConnectSatellite;
-import events.lidar.EventLidarOn;
-import events.lights.brakeLight.EventBrakeLightOn;
-import events.lights.indicator.EventLeftIndicatorOn;
-import events.lights.ledHeadlight.EventLEDOn;
+
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -43,6 +39,7 @@ public class TestFacade {
     }
 
     @Test
+    @Order(1)
     public void testStartup() throws Exception{
         autonomousVehicle.getCentralUnit().startup();
         // engine on
@@ -73,6 +70,7 @@ public class TestFacade {
     }
 
     @Test
+    @Order(2)
     public void testMove(){
         autonomousVehicle.getCentralUnit().startup();
         autonomousVehicle.getCentralUnit().move(50,1);
@@ -95,9 +93,12 @@ public class TestFacade {
         for (BrakeLight brakeLight : autonomousVehicle.getBrakeLight()) {
             assertFalse(brakeLight.isOn());
         }
+        autonomousVehicle.getCentralUnit().stop();
     }
 
+
     @Test
+    @Order(3)
     public void testLeftTurn(){
         autonomousVehicle.getCentralUnit().startup();
         autonomousVehicle.getCentralUnit().move(50,1);
@@ -117,9 +118,11 @@ public class TestFacade {
         for (BrakeLight brakeLight : autonomousVehicle.getBrakeLight()) {
             assertTrue(brakeLight.isOn());
         }
+        autonomousVehicle.getCentralUnit().stop();
     }
 
     @Test
+    @Order(4)
     public void testRightTurn(){
         autonomousVehicle.getCentralUnit().startup();
         autonomousVehicle.getCentralUnit().move(50,1);
@@ -139,9 +142,11 @@ public class TestFacade {
         for (BrakeLight brakeLight : autonomousVehicle.getBrakeLight()) {
             assertTrue(brakeLight.isOn());
         }
+        autonomousVehicle.getCentralUnit().stop();
     }
 
     @Test
+    @Order(5)
     public void testStop(){
         autonomousVehicle.getCentralUnit().startup();
         autonomousVehicle.getCentralUnit().move(50,1);
@@ -159,6 +164,7 @@ public class TestFacade {
     }
 
     @Test
+    @Order(6)
     public void testEmergencyStop() throws Exception{
         autonomousVehicle.getCentralUnit().startup();
         autonomousVehicle.getCentralUnit().move(50,1);
@@ -196,6 +202,7 @@ public class TestFacade {
         assertFalse(autonomousVehicle.getElectricEngine().isOn());
     }
     @Test
+    @Order(7)
     public void testShutdown() throws Exception{
         autonomousVehicle.getCentralUnit().startup();
         autonomousVehicle.getCentralUnit().move(50,1);
