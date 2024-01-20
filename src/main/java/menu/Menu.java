@@ -1,7 +1,7 @@
 package menu;
 
-import Memento.Config;
-import Memento.ConfigCaretaker;
+import memento.Config;
+import memento.ConfigCaretaker;
 
 import java.util.Scanner;
 
@@ -12,7 +12,6 @@ public class Menu {
     public Menu(Config config){
         this.config = config;
         caretaker.setSaveConfig(config.Save());
-        config.PrintConfig();
         MenuLoop();
     }
 
