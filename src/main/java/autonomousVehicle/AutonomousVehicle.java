@@ -189,7 +189,7 @@ public class AutonomousVehicle {
         public Builder Door() {
             this.door = new Door[4];
             for (int i = 0; i < 4; i++) {
-                this.door[i] = new Door();
+                this.door[i] = new Door(false);
             }
             return this;
         }
