@@ -23,6 +23,9 @@ public abstract class ElectricEngine extends Subscriber implements IEngine {
     public boolean isOn() {
         return isOn;
     }
+    public void stop(){
+        setCurrentRPM(0);
+    }
     @Subscribe
     public void receive(EventEngineOn eventEngineOn) {
         isOn = true;
@@ -46,6 +49,10 @@ public abstract class ElectricEngine extends Subscriber implements IEngine {
         }else{
             System.out.println("Engine is off");
         }
+    }
+    @Subscribe
+    public void receive(EventEngineStop eventEngineStop) {
+        stop();
     }
 
     @Override
