@@ -43,16 +43,20 @@ public class Menu {
                     MenuLoop();
                     break;
                 case "iv":
-                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                case "-config":
+                    System.out.println("Starting application");
                     break;
                 default:
-                    System.out.println("Wrong Input [i], [ii] , [iii], [iv]");
+                    System.out.println("Wrong Input [i], [ii], [iii], [iv]");
             }
         }
         while (!input.equals("i") &&
                 !input.equals("ii") &&
                 !input.equals("iii") &&
-                !input.equals("iv"));
+                !input.equals("iv") &&
+                !input.equals("-config"));
     }
 
     private void SetParameter(){
@@ -111,7 +115,7 @@ public class Menu {
                             System.out.println("new value " + allowedValues);
                             break;
                         default:
-                            System.out.println("Wrong input");
+                            System.out.println("Wrong input ");
                     }
                 }
                 while (!allowedValues.equals("doNothing") &&
